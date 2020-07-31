@@ -1,0 +1,19 @@
+nav {
+    background-color: #f3eaf3;
+}
+
+.card {
+    background-color: #f3eaf3;
+}
+
+button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #3d2c3a;
+    color: white;
+}
+
+label {
+    padding: 0 5px 0 0;
+}

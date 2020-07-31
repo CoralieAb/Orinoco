@@ -1,7 +1,9 @@
 function getOneProduct() {
   var url = "http://localhost:3000/api/teddies/";
   console.log(window.location.search);
-  if (window.location.search == "?id=5be9c8541c9d440000665243") {
+  let location = window.location.search.substring(4);
+  url += location;
+  /*if (window.location.search == "?id=5be9c8541c9d440000665243") {
     url += "5be9c8541c9d440000665243";
   } else if (window.location.search == "?id=5beaa8bf1c9d440000a57d94") {
     url += "5beaa8bf1c9d440000a57d94";
@@ -11,7 +13,7 @@ function getOneProduct() {
     url += "5beaabe91c9d440000a57d96";
   } else if (window.location.search == "?id=5beaacd41c9d440000a57d97") {
     url += "5beaacd41c9d440000a57d97";
-  }
+  }*/
   console.log(url);
   fetch(url)
     .then(response => response.json())
@@ -26,6 +28,13 @@ function getOneProduct() {
 function createProductElement(response) {
   const teddy = response;
   console.log(teddy);
+
+  // Modification du title dans le head
+  document.title = teddy.name + " | Orinoco";
+
+  //Modification du H1 de la page
+  document.querySelector("h1").textContent = teddy.name;
+
   // Création des éléments relatifs au produit dans le DOM
   let prevElt = document.createElement("div");
   prevElt.className = "col-md-8";
@@ -46,6 +55,13 @@ function createProductElement(response) {
 
   let productPriceElt = document.createElement("p");
   productPriceElt.textContent = teddy.price / 100 + " €";
+
+  let customGroup = document.createElement("div");
+  customGroup.className = "custom-group";
+
+  let customQtyGroup = document.createElement("div");
+  
+  let customColorGroup = document.createElement("div");
 
   // Création des éléments permettant la sélection de la quantité
   let qteLabelElt = document.createElement("label");
@@ -75,19 +91,36 @@ function createProductElement(response) {
   }
 
   // Création bouton pour ajout au panier
-  let productAddToBasketElt = document.createElement("button");
-  productAddToBasketElt.textContent = "Ajouter au panier";
+  let addToCartElt = document.createElement("button");
+  addToCartElt.setAttribute("data-id", teddy._id);
+  addToCartElt.setAttribute("data-name", teddy.name);
+  addToCartElt.setAttribute("data-price", teddy.price);
+  addToCartElt.setAttribute("data-url", "./view/product.html?id=" + teddy._id);
+  addToCartElt.textContent = "Ajouter au panier";
+  addToCartElt.addEventListener("click", function() {
+    let articleInCart= {
+      article: teddy.name,
+      price: teddy.price /100,
+      qte: qteSelectElt.value,
+      color: colorSelectElt.value
+    }
+    localStorage.setItem(teddy._id, JSON.stringify(articleInCart));
+    console.log(localStorage);
+  })
 
   // Insertion des éléments relatifs au produit dans le DOM
   prevElt.appendChild(productImgElt);
   detailsElt.appendChild(productTitleElt);
   detailsElt.appendChild(productDescrElt);
   detailsElt.appendChild(productPriceElt);
-  detailsElt.appendChild(qteLabelElt);
-  detailsElt.appendChild(qteSelectElt);
-  detailsElt.appendChild(colorLabelElt);
-  detailsElt.appendChild(colorSelectElt);
-  detailsElt.appendChild(productAddToBasketElt);
+  customQtyGroup.appendChild(qteLabelElt);
+  customQtyGroup.appendChild(qteSelectElt);
+  customColorGroup.appendChild(colorLabelElt);
+  customColorGroup.appendChild(colorSelectElt);
+  customGroup.appendChild(customQtyGroup);
+  customGroup.appendChild(customColorGroup);
+  detailsElt.appendChild(customGroup);
+  detailsElt.appendChild(addToCartElt);
   document.getElementById("preview").appendChild(prevElt);
   document.getElementById("preview").appendChild(detailsElt);
 }
