@@ -38,7 +38,8 @@ function createProductsElements(data) {
     let aCardTitleElt = document.createElement("a");
 
     let cardPriceElt = document.createElement("p");
-    cardPriceElt.textContent = (teddy.price / 100).toFixed(2) + " €";;
+    //cardPriceElt.textContent = (teddy.price / 100).toFixed(2) + " €";
+    cardPriceElt.textContent = formatCurrencyElement(teddy.price);
 
     // Création bouton pour aller à l'article
     let seeProductElt = document.createElement("button");
@@ -61,3 +62,4 @@ function createProductsElements(data) {
 }
 
 getAllProducts();
+getTotalQtyInCart();

@@ -9,7 +9,8 @@ nav {
 button {
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
     background-color: #3d2c3a;
     color: white;
 }
@@ -19,27 +20,30 @@ button:hover {
     color: #3d2c3a;
 }
 
+/*Cart.html style*/
+table {
+    table-layout: fixed;
+    width: 100%;
+}
 .delete {
     background-color: #FF0000;
     color: white;
-    padding: 0 5px;
 }
-
 .delete:hover {
     background-color: #A40000;
     color: white;
 }
-
+.delete-row {
+    margin: 0;
+    padding: 0 1rem;
+}
 #total-cart {
     font-weight: bold;
     text-align: right;
 }
-
-label {
-    padding: 0 5px 0 0;
+.form-container {
+    margin: 1rem 0;
 }
-
-table {
-    table-layout: fixed;
-    width: 100%;
+label {
+    padding-right: 0.5rem;
 }

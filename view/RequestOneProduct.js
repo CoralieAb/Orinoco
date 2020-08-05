@@ -8,14 +8,14 @@ function getOneProduct() {
   fetch(url)
     .then(response => response.json())
     .then(function (data) {
-      createProductElement(data);
+      createProductElements(data);
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-function createProductElement(response) {
+function createProductElements(response) {
   const teddy = response;
   console.log(teddy);
 
@@ -44,7 +44,7 @@ function createProductElement(response) {
   productDescrElt.textContent = teddy.description;
 
   let productPriceElt = document.createElement("p");
-  productPriceElt.textContent = (teddy.price / 100).toFixed(2) + " €";;
+  productPriceElt.textContent = formatCurrencyElement(teddy.price);
 
   let customGroup = document.createElement("div");
   customGroup.className = "custom-group";
@@ -90,8 +90,8 @@ function createProductElement(response) {
   addToCartElt.addEventListener("click", function() {
     let articleInCart= {
       name: teddy.name,
-      price: (teddy.price / 100).toFixed(2),
-      qte: qteSelectElt.value,
+      price: teddy.price,
+      qte: Number(qteSelectElt.value),
       color: colorSelectElt.value
     }
     localStorage.setItem(teddy._id, JSON.stringify(articleInCart));
@@ -116,3 +116,4 @@ function createProductElement(response) {
 }
 
 getOneProduct();
+getTotalQtyInCart();

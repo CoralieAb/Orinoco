@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="../style/style.css" />
+    <script src="../GlobalFunctions.js" defer></script>
     <script src="./cart.js" defer></script>
 </head>
 
@@ -31,6 +32,7 @@
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Panier
+                            <span id="qty-in-cart"></span>
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -67,7 +69,7 @@
             <button id="delete-cart" class="delete">Vider le panier</button>
         </div>
         <div class="form-container">
-            <h2>Remplissez ce formulaire pour passer commande</h2>
+            <h2>Vos informations de commande</h2>
             <form>
                 <div class="form-group">
                     <label for="lastname">Nom</label>

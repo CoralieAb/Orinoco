@@ -1,14 +1,12 @@
 console.log(localStorage);
 
-//initialisation de la variable qui recevra le prix total du panier
-let totalCart = 0;
-
 // Création du panier depuis les données du LocalStorage(LS)
 for (i = 0; i < localStorage.length; i++) {
   //Un élément ligne (tr) est généré pour chaque élément présent dans le LS
   let trElt = document.createElement("tr");
   let articleInCart = JSON.parse(localStorage.getItem(localStorage.key(i)));
   //console.log(articleInCart);
+
   //Un élement data (td) est généré pour chaque donnée présente dans un élément du LS
   let nameCell = document.createElement("td");
   nameCell.textContent = articleInCart.name;
@@ -17,14 +15,16 @@ for (i = 0; i < localStorage.length; i++) {
   colorCell.textContent = articleInCart.color;
 
   let priceCell = document.createElement("td");
-  priceCell.textContent = articleInCart.price + " €";;
+  //priceCell.textContent = articleInCart.price + " €";
+  priceCell.textContent = formatCurrencyElement(articleInCart.price);
 
   let qtyCell = document.createElement("td");
   qtyCell.textContent = articleInCart.qte;
 
   let totalRowCell = document.createElement("td");
   totalRowCell.classList.add("total-row");
-  totalRowCell.textContent = parseFloat(articleInCart.price * articleInCart.qte).toFixed(2) + " €";;
+  //totalRowCell.textContent = parseFloat(articleInCart.price * articleInCart.qte).toFixed(2) + " €";
+  totalRowCell.textContent = formatCurrencyElement(articleInCart.price * articleInCart.qte);
 
   //Création du bouton dans un élément td permettant la suppression de la ligne
   let deleteRowCell = document.createElement("td");
@@ -43,13 +43,13 @@ for (i = 0; i < localStorage.length; i++) {
   trElt.appendChild(totalRowCell);
   trElt.appendChild(deleteRowCell);
   document.getElementById("cart-content").appendChild(trElt);
-
-  //Incrémentation de la variable totalCart
-  totalCart += parseFloat(articleInCart.price * articleInCart.qte);
-  console.log(totalCart);
 };
-//Affichage du total dans l'élément DOM correspondant
-document.getElementById("total-cart").textContent = "Total panier TTC : " + totalCart.toFixed(2) + " €";
+
+//Modification du H1 small de la page avec la quantité total de produits dans le panier
+document.querySelector("small").textContent = getTotalQtyInCart() + " article(s)";
+
+//Affichage du prix total du panier dans l'élément DOM correspondant
+document.getElementById("total-cart").textContent = "Total panier TTC : " + getTotalPriceInCart();
 
 //Permet le vidage de la ligne du LS à supprimer et le rechargement de la fenêtre
 const deleteRowButtons = document.getElementsByClassName("delete-row");
