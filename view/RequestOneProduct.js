@@ -1,20 +1,10 @@
 function getOneProduct() {
-  var url = "http://localhost:3000/api/teddies/";
-  console.log(window.location.search);
+  //var url = "http://localhost:3000/api/teddies/";
+  var url = "https://oc-p5-api.herokuapp.com/api/teddies/";
+  //console.log(window.location.search);
   let location = window.location.search.substring(4);
   url += location;
-  /*if (window.location.search == "?id=5be9c8541c9d440000665243") {
-    url += "5be9c8541c9d440000665243";
-  } else if (window.location.search == "?id=5beaa8bf1c9d440000a57d94") {
-    url += "5beaa8bf1c9d440000a57d94";
-  } else if (window.location.search == "?id=5beaaa8f1c9d440000a57d95") {
-    url += "5beaaa8f1c9d440000a57d95";
-  } else if (window.location.search == "?id=5beaabe91c9d440000a57d96") {
-    url += "5beaabe91c9d440000a57d96";
-  } else if (window.location.search == "?id=5beaacd41c9d440000a57d97") {
-    url += "5beaacd41c9d440000a57d97";
-  }*/
-  console.log(url);
+  //console.log(url);
   fetch(url)
     .then(response => response.json())
     .then(function (data) {
@@ -54,7 +44,7 @@ function createProductElement(response) {
   productDescrElt.textContent = teddy.description;
 
   let productPriceElt = document.createElement("p");
-  productPriceElt.textContent = teddy.price / 100 + " €";
+  productPriceElt.textContent = (teddy.price / 100).toFixed(2) + " €";;
 
   let customGroup = document.createElement("div");
   customGroup.className = "custom-group";
@@ -99,8 +89,8 @@ function createProductElement(response) {
   addToCartElt.textContent = "Ajouter au panier";
   addToCartElt.addEventListener("click", function() {
     let articleInCart= {
-      article: teddy.name,
-      price: teddy.price /100,
+      name: teddy.name,
+      price: (teddy.price / 100).toFixed(2),
       qte: qteSelectElt.value,
       color: colorSelectElt.value
     }

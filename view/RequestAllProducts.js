@@ -1,5 +1,6 @@
 function getAllProducts() {
-  const url = "http://localhost:3000/api/teddies/";
+  //const url = "http://localhost:3000/api/teddies/";
+  const url = "https://oc-p5-api.herokuapp.com/api/teddies/";
   fetch(url)
     .then(response => response.json())
     .then(function (data) {
@@ -37,7 +38,7 @@ function createProductsElements(data) {
     let aCardTitleElt = document.createElement("a");
 
     let cardPriceElt = document.createElement("p");
-    cardPriceElt.textContent = teddy.price / 100 + " €";
+    cardPriceElt.textContent = (teddy.price / 100).toFixed(2) + " €";;
 
     // Création bouton pour aller à l'article
     let seeProductElt = document.createElement("button");

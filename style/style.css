@@ -14,6 +14,32 @@ button {
     color: white;
 }
 
+button:hover {
+    background-color: #c39fd3;
+    color: #3d2c3a;
+}
+
+.delete {
+    background-color: #FF0000;
+    color: white;
+    padding: 0 5px;
+}
+
+.delete:hover {
+    background-color: #A40000;
+    color: white;
+}
+
+#total-cart {
+    font-weight: bold;
+    text-align: right;
+}
+
 label {
     padding: 0 5px 0 0;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
 }
