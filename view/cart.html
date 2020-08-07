@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../style/style.css" />
     <script src="../GlobalFunctions.js" defer></script>
     <script src="./cart.js" defer></script>
+    <script src="../controllers/formValidation.js" defer></script>
 </head>
 
 <body>
@@ -70,7 +71,7 @@
         </div>
         <div class="form-container">
             <h2>Vos informations de commande</h2>
-            <form>
+            <form id="order-information" action="./order-confirmation.html">
                 <div class="form-group">
                     <label for="lastname">Nom</label>
                     <input type="text" class="form-control" id="lastname" required />
@@ -78,13 +79,18 @@
                     <label for="firstname">Prénom</label>
                     <input type="text" class="form-control" id="firstname" required />
 
-                    <label for="address">Adresse</label>
-                    <input type="text" class="form-control" id="address" required />
+                    <fieldset>
+                        <label for="address">Adresse</label>
+                        <input type="text" class="form-control" id="address" required />
+
+                        <label for="city">Ville</label>
+                        <input type="text" class="form-control" id="city" required />
+                    </fieldset>
 
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" required />
 
-                    <button type="submit">Envoyer</button>
+                    <input type="submit" value="Envoyer" />
                 </div>
             </form>
         </div>

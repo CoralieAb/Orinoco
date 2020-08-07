@@ -96,6 +96,11 @@ function createProductElements(response) {
     }
     localStorage.setItem(teddy._id, JSON.stringify(articleInCart));
     console.log(localStorage);
+    if (confirm("Ajouté au panier ! \n Souhaitez-vous voir votre panier?")) {
+      window.location.href = "./cart.html";
+    } else {
+      window.location.reload(true);
+    }
   })
 
   // Insertion des éléments relatifs au produit dans le DOM
