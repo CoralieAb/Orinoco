@@ -2,10 +2,16 @@ function getAllProducts() {
   //const url = "http://localhost:3000/api/teddies/";
   const url = "https://oc-p5-api.herokuapp.com/api/teddies/";
   fetch(url)
-    .then(response => response.json())
-    .then(function (data) {
-      console.log(data);
-      createProductsElements(data);
+    .then(response => {
+      if (response.ok) {
+        response.json()
+          .then(function (data) {
+            console.log(data);
+            createProductsElements(data);
+          });
+      } else {
+        console.error("Réponse du serveur : " + response.status);
+      }
     })
     .catch(function (error) {
       console.log(error);

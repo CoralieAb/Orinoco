@@ -1,15 +1,21 @@
 function getOneProduct() {
   //var url = "http://localhost:3000/api/teddies/";
-  var url = "https://oc-p5-api.herokuapp.com/api/teddies/";
+  let url = "https://oc-p5-api.herokuapp.com/api/teddies/";
   //console.log(window.location.search);
   let location = window.location.search.substring(4);
   url += location;
   //console.log(url);
   fetch(url)
-    .then(response => response.json())
-    .then(function (data) {
-      createProductElements(data);
-    })
+    .then(response => {
+      if (response.ok) {
+        response.json()
+          .then(function (data) {
+            createProductElements(data);
+          });
+      } else {
+        console.error("Réponse du serveur : " + response.status);
+      }
+    })    
     .catch(function (error) {
       console.log(error);
     });
@@ -80,15 +86,16 @@ function createProductElements(response) {
     colorSelectElt.appendChild(colorOptionElt);
   }
 
-  // Création bouton pour ajout au panier
+  // Création bouton pour ajout du/des produits dans le Local Storage et donc dans panier
   let addToCartElt = document.createElement("button");
   addToCartElt.setAttribute("data-id", teddy._id);
   addToCartElt.setAttribute("data-name", teddy.name);
   addToCartElt.setAttribute("data-price", teddy.price);
   addToCartElt.setAttribute("data-url", "./view/product.html?id=" + teddy._id);
   addToCartElt.textContent = "Ajouter au panier";
+  //Ajout des produits dans le Local Storage au clic sur Ajout au panier
   addToCartElt.addEventListener("click", function() {
-    let articleInCart= {
+    let articleInCart = {
       name: teddy.name,
       price: teddy.price,
       qte: Number(qteSelectElt.value),

@@ -46,3 +46,14 @@ table {
 label {
     padding-right: 0.5rem;
 }
+
+#order-content {
+    background-color: #f3eaf3;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 2rem 2rem;
+}
+
+li {
+    list-style-type: none;
+}

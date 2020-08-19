@@ -56,7 +56,7 @@ const deleteRowButtons = document.getElementsByClassName("delete-row");
 for (let deleteRowButton of deleteRowButtons) {
   deleteRowButton.addEventListener("click", function () {
     for (i = 0; i < localStorage.length; i++) {
-      console.log(localStorage.key(i));
+      //console.log(localStorage.key(i));
       console.log(deleteRowButton.getAttribute("data-id"));
       if (localStorage.key(i) == deleteRowButton.getAttribute("data-id")) {
         if (confirm("Voulez-vous supprimer ces article du panier?")) {

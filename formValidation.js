@@ -1,8 +1,6 @@
 let regNameAndCity = /^[a-zà-ù][a-zà-ù-]*[a-zà-ù]$/i;
 let regMail = /^[a-z][\w.-]+@[a-z][\w-]+\.[a-z]+$/i;
 
-const form = document.getElementById("order-information");
-
 //Permet la validation des champs en live
 function validerSaisieLive() {
   let inputElts = document.getElementsByTagName("input");
@@ -31,6 +29,7 @@ function validerSaisieLive() {
 
 //Permet la validation à la soumission du formulaire
 function validerSaisie() {
+  const form = document.getElementById("order-information");
   if (regNameAndCity.test(form.elements.lastname.value) && regNameAndCity.test(form.elements.firstname.value) && regNameAndCity.test(form.elements.city.value) && regMail.test(form.elements.email.value)) {
     return true;
   } else {
@@ -59,14 +58,52 @@ function validerSaisie() {
 }
 
 //Soumission du formulaire
+const form = document.getElementById("order-information");
 form.addEventListener("submit", function (e) {
-  let contact = new Object();
-  if (validerSaisie()) {
-    contact.lastname = form.elements.lastname.value;
-    contact.firstname = form.elements.firstname.value;
-    contact.address = form.elements.address.value;
-    contact.city = form.elements.city.value;
-    contact.email = form.elements.email.value
+  if (validerSaisie() && localStorage.length > 0) {
+    let contact = {
+      lastName: form.elements.lastname.value,
+      firstName: form.elements.firstname.value,
+      address: form.elements.address.value,
+      city: form.elements.city.value,
+      email: form.elements.email.value
+    }
+    let products = [];
+    for (i = 0; i < localStorage.length; i++) {
+      products.push(localStorage.key(i));
+    }
+    const order = {
+      contact: contact,
+      products: products
+    };
+    console.log(order);
+    fetch("https://oc-p5-api.herokuapp.com/api/teddies/order", {
+      method: "POST",
+      body: JSON.stringify(order),
+      headers: {
+        "Content-Type": "application/json"
+      }
+      })
+      .then(response => {
+        if (response.ok) {
+          response.json()
+            .then(data => {
+              localStorage.clear();
+              localStorage.setItem("orderId", JSON.stringify(data.orderId));
+              localStorage.setItem("contact", JSON.stringify(data.contact));
+              localStorage.setItem("products", JSON.stringify(data.products));
+              window.location.href = "./order-confirmation.html";
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        } else {
+          console.error("Réponse du serveur : " + response.status);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   e.preventDefault();
 });
