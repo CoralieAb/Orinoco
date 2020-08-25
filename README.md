@@ -1,12 +1,16 @@
 # Orinoco #
 
-This is the back end server for Project 5 of the Junior Web Developer path.
+This is the Project 5 of the Web Developer path.
 
 ### Prerequisites ###
+
+EDIT 25/08/2020 -- You will not neet to have Node and `npm` installed locally on your machine.
 
 You will need to have Node and `npm` installed locally on your machine.
 
 ### Installation ###
+
+EDIT 25/08/2020 -- This steps below are not necessary anymore.
 
 Clone this repo. From within the project folder, run `npm install`. You 
 can then run the server with `node server`. 
