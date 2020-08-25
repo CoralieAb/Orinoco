@@ -104,6 +104,8 @@ form.addEventListener("submit", function (e) {
       .catch(function (error) {
         console.log(error);
       });
+  } else if (!localStorage.length > 0) {
+    alert("Votre panier est vide !");
   };
   e.preventDefault();
 });

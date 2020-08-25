@@ -1,7 +1,6 @@
 function getOneProduct() {
   //var url = "http://localhost:3000/api/teddies/";
   let url = "https://oc-p5-api.herokuapp.com/api/teddies/";
-  //console.log(window.location.search);
   let location = window.location.search.substring(4);
   url += location;
   //console.log(url);

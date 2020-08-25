@@ -10,6 +10,7 @@ button {
     border: none;
     border-radius: 5px;
     padding: 0.5rem;
+    margin-top: 0.5rem;
     background-color: #3d2c3a;
     color: white;
 }
@@ -19,7 +20,7 @@ button:hover {
     color: #3d2c3a;
 }
 
-/*Cart.html style*/
+/*cart.html style - Cart*/
 table {
     table-layout: fixed;
     width: 100%;
@@ -40,13 +41,29 @@ table {
     font-weight: bold;
     text-align: right;
 }
+
+/*cart.html style - Form*/
 .form-container {
     margin: 1rem 0;
 }
 label {
     padding-right: 0.5rem;
+    margin-top: 0.5rem;
 }
 
+#submit {
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: #34DE3E;
+}
+
+#submit:hover {
+    background-color: lightgreen;
+}
+
+/*order-confirmation.html style*/
 #order-content {
     background-color: #f3eaf3;
     text-align: center;

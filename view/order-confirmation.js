@@ -23,7 +23,7 @@ productsListElement.textContent = "Vos produits :"
 
 for (i = 0; i < orderProducts.length; i++) {
   let productElement = document.createElement("li");
-  productElement.textContent = orderProducts[i].name;
+  productElement.textContent = orderProducts[i].name + " " + formatCurrencyElement(orderProducts[i].price);
   productsListElement.appendChild(productElement);
 }
 
